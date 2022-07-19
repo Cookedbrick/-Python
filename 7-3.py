@@ -23,11 +23,10 @@ class Cell:
 
     def __truediv__(self, other):
         return Cell(self.unit // other.unit)
-
+      
     def make_order(self, sample, unit_in_row):       
-        return( ''.join('\n'.rjust(unit_in_row + 1, '*')
-                       for i in range(sample.unit//unit_in_row))
-                + '\n'.rjust(sample.unit%unit_in_row + 1, '*'))
+        return( ''.join('\n'.rjust(unit_in_row + 1 if i < sample.unit else sample.unit % unit_in_row +1, '*')
+                       for i in range(unit_in_row, sample.unit + unit_in_row, unit_in_row)))
 
 
 c_1 = Cell()
